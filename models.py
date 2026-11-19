@@ -13,7 +13,7 @@ class Genre(SQLModel, table=True):
     __tablename__: str = "genres"
 
     id: int | None = Field(default=None, primary_key=True)
-    name: str = Field()
+    name: str = Field(unique=True)
 
 
 class Movie(SQLModel, table=True):
@@ -24,4 +24,4 @@ class Movie(SQLModel, table=True):
     in_theaters: bool = False
     release_year: int
     rating: float | None = Field(default=None)
-    genre_id: int | None = Field(default=None, foreign_key="genres.id")
+    genre_id: int | None = Field(default=None, foreign_key="genres.id", index=True)
